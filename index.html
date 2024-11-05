@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+        <section id="seccion">
+            <header>ADMININTRADOR DE TAREAS</header>
+
+            <section>
+                <div id="cajaTexto">
+                    <input type="text" v-model="nuevaTarea" placeholder="Escribe una tarea" @keyup.enter="agregarTarea">
+                </div>
+                <button @click="agregarTarea">Agregar tarea</button>
+                <button @click="limpiarLista">Limpiar lista</button>
+            
+                <article>
+                    <button @click="aumentarProgreso" :disabled="progreso === 100">+</button>
+                    <button @click="disminuirProgreso" :disabled="progreso === 0">-</button>
+                </article>
+            
+                <label class="form-label">Progreso</label>
+                <input type="range" v-model="progreso" min="0" max="100" :class="colorProgreso">
+            </section>
+            
+            <div>
+                <section id="libreta">
+                    <h2>Lista de tareas</h2>
+                    <ul>
+                        <li v-for="(tarea, index) in tareas" :key="index" :class="{ completada: tarea.completada }" @click="alternarTarea(index)">
+                            <p>{{ tarea.texto }}</p>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
